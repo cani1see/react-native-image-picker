@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -421,7 +422,9 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
     }
 
     BitmapFactory.Options options = new BitmapFactory.Options();
-    options.inJustDecodeBounds = true;
+    options.inJustDecodeBounds = false;
+    options.inPreferredConfig = Bitmap.Config.RGB_565;
+    options.inDither = true;
     BitmapFactory.decodeFile(imageConfig.original.getAbsolutePath(), options);
     int initialWidth = options.outWidth;
     int initialHeight = options.outHeight;
